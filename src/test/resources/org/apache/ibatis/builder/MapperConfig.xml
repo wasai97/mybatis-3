@@ -62,11 +62,17 @@
       <transactionManager type="JDBC">
         <property name="" value=""/>
       </transactionManager>
-      <dataSource type="UNPOOLED">
-        <property name="driver" value="${driver}"/>
-        <property name="url" value="${url}"/>
-        <property name="username" value="${username}"/>
-        <property name="password" value="${password}"/>
+<!--      <dataSource type="UNPOOLED">-->
+<!--        <property name="driver" value="${driver}"/>-->
+<!--        <property name="url" value="${url}"/>-->
+<!--        <property name="username" value="${username}"/>-->
+<!--        <property name="password" value="${password}"/>-->
+<!--      </dataSource>-->
+      <dataSource type="org.apache.ibatis.ws.DruidDataSourceFactory">
+        <property name="url" value="jdbc:mysql://1.116.213.193:3306/arcticfox?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;maxReconnects=10"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="arcticfox"/>
+        <property name="password" value="arcticfox123456"/>
       </dataSource>
     </environment>
   </environments>

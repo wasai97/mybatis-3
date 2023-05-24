@@ -15,11 +15,7 @@
  */
 package org.apache.ibatis.domain.blog.mappers;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.domain.blog.Author;
@@ -53,5 +49,7 @@ public interface AuthorMapper {
   int deleteAuthor(int id);
 
   int updateAuthor(Author author);
+
+  Date queryCurrent();
 
 }

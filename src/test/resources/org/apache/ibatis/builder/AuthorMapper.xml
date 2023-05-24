@@ -76,6 +76,10 @@
         select * from author
     </select>
 
+    <select id="queryCurrent" resultType="java.util.Date">
+        select CURRENT_DATE()
+    </select>
+
     <select id="selectAllAuthorsLinkedList" resultType="org.apache.ibatis.domain.blog.Author">
         select * from author
     </select>

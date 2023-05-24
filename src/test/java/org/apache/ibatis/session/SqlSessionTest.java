@@ -22,12 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javassist.util.proxy.Proxy;
 
@@ -67,6 +62,22 @@ class SqlSessionTest extends BaseDataTest {
     final String resource = "org/apache/ibatis/builder/MapperConfig.xml";
     final Reader reader = Resources.getResourceAsReader(resource);
     sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+  }
+
+  @Test
+  void shouldSelectAllAuthors() {
+    try (SqlSession session = sqlMapper.openSession(TransactionIsolationLevel.SERIALIZABLE)) {
+      List<Author> authors = session.selectList("org.apache.ibatis.domain.blog.mappers.AuthorMapper.selectAllAuthors");
+      assertEquals(2, authors.size());
+    }
+  }
+
+  @Test
+  void selectCur() {
+    try (SqlSession session = sqlMapper.openSession(TransactionIsolationLevel.SERIALIZABLE)) {
+      Date date = session.selectOne("org.apache.ibatis.domain.blog.mappers.AuthorMapper.queryCurrent");
+      System.out.println(date);
+    }
   }
 
   @Test
@@ -151,13 +162,7 @@ class SqlSessionTest extends BaseDataTest {
     }
   }
 
-  @Test
-  void shouldSelectAllAuthors() {
-    try (SqlSession session = sqlMapper.openSession(TransactionIsolationLevel.SERIALIZABLE)) {
-      List<Author> authors = session.selectList("org.apache.ibatis.domain.blog.mappers.AuthorMapper.selectAllAuthors");
-      assertEquals(2, authors.size());
-    }
-  }
+
 
   @Test
   void shouldFailWithTooManyResultsException() {
