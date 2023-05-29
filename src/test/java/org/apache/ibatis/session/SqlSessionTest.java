@@ -71,6 +71,14 @@ class SqlSessionTest extends BaseDataTest {
       assertEquals(2, authors.size());
     }
   }
+  @Test
+  void selectCurMapper() {
+    try (SqlSession session = sqlMapper.openSession(TransactionIsolationLevel.SERIALIZABLE)) {
+      AuthorMapper mapper = session.getMapper(AuthorMapper.class);
+      Date date = mapper.queryCurrent();
+      System.out.println(date);
+    }
+  }
 
   @Test
   void selectCur() {

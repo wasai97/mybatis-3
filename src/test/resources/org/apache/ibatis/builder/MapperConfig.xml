@@ -1,21 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--
-
-       Copyright 2009-2022 the original author or authors.
-
-       Licensed under the Apache License, Version 2.0 (the "License");
-       you may not use this file except in compliance with the License.
-       You may obtain a copy of the License at
-
-          https://www.apache.org/licenses/LICENSE-2.0
-
-       Unless required by applicable law or agreed to in writing, software
-       distributed under the License is distributed on an "AS IS" BASIS,
-       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-       See the License for the specific language governing permissions and
-       limitations under the License.
-
--->
 <!DOCTYPE configuration
     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-config.dtd">
@@ -32,6 +15,7 @@
     <setting name="useGeneratedKeys" value="false"/>
     <setting name="defaultExecutorType" value="SIMPLE"/>
     <setting name="defaultStatementTimeout" value="25"/>
+<!--    <setting name="" value=""/>-->
   </settings>
 
   <typeAliases>
@@ -41,21 +25,27 @@
     <typeAlias alias="Post" type="org.apache.ibatis.domain.blog.Post"/>
     <typeAlias alias="Section" type="org.apache.ibatis.domain.blog.Section"/>
     <typeAlias alias="Tag" type="org.apache.ibatis.domain.blog.Tag"/>
+    <package name="org.apache.ibatis.ws" />
   </typeAliases>
+
+
 
   <typeHandlers>
     <typeHandler javaType="String" jdbcType="VARCHAR" handler="org.apache.ibatis.builder.CustomStringTypeHandler"/>
+    <package name="org.apache.ibatis.ws"/>
   </typeHandlers>
 
   <objectFactory type="org.apache.ibatis.builder.ExampleObjectFactory">
     <property name="objectFactoryProperty" value="100"/>
   </objectFactory>
-
+  <objectWrapperFactory type="org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory"/>
+  <reflectorFactory type="org.apache.ibatis.reflection.DefaultReflectorFactory"/>
   <plugins>
     <plugin interceptor="org.apache.ibatis.builder.ExamplePlugin">
       <property name="pluginProperty" value="100"/>
     </plugin>
   </plugins>
+
 
   <environments default="development">
     <environment id="development">

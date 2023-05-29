@@ -22,6 +22,8 @@
 
 <mapper namespace="org.apache.ibatis.domain.blog.mappers.AuthorMapper">
 
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
     <parameterMap id="selectAuthor" type="org.apache.ibatis.domain.blog.Author">
         <parameter property="id" />
     </parameterMap>
@@ -64,6 +66,9 @@
         </constructor>
     </resultMap>
 
+    <sql id="test">
+        *
+    </sql>
     <select id="selectAllAuthors" resultType="org.apache.ibatis.domain.blog.Author">
         select * from author
     </select>
